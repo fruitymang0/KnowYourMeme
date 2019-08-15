@@ -10,7 +10,10 @@ class KnowYourMeme(callbacks.Plugin):
     """
     Looks up memes on the website KnowYourMeme
     """
-
+    sT = ""
+    count = 0
+    
+    def _search(
     def meme(self, irc, msg, args, searchTerm):
         """
         [<searchTerm>]
@@ -20,7 +23,11 @@ class KnowYourMeme(callbacks.Plugin):
         found = 1
         if(not searchTerm):
             page = "http://knowyourmeme.com/random"
+            count = 0
         else:
+            if(sT!=searchTerm)
+                sT = searchTerm
+                count = 0
             for i in searchTerm:  #formatting search term
                 if i == " ":
                     i = "+"
@@ -29,12 +36,16 @@ class KnowYourMeme(callbacks.Plugin):
             soup = BeautifulSoup(resultsPage.content, 'html.parser')  
             listOfElements = soup.findAll("a", href=True)  #Finding all links in the results page
             counter = 0
+            count2 = count
             for i in listOfElements:
                 if "/random" in i['href'] and counter > 10:
                     found = 0
                     break
                 if "/memes/" in i['href'] and counter > 110:
-                    break
+                    if(count2==0):
+                        break
+                    else:
+                        count2--
                 counter+=1
             page = "http://knowyourmeme.com" + listOfElements[counter]['href']  #Picking first meme
 
@@ -59,6 +70,17 @@ class KnowYourMeme(callbacks.Plugin):
         finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
         irc.reply(f"{title}, {finalURL}")
     memepic = wrap(memepic)
+    
+    def next(self, irc, msg, args):
+        """
+        Goes to the next meme on the list.
+        """
+        if(none sT):
+            irc.reply("No meme has been searched for yet.")
+        else:
+            count +=1
+            meme(self, irc, msg, args, sT)
+    meme = wrap(meme)
     
       
 Class = KnowYourMeme
