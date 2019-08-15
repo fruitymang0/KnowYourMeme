@@ -13,7 +13,6 @@ class KnowYourMeme(callbacks.Plugin):
     sT = ""
     count = 0
     
-    def _search(
     def meme(self, irc, msg, args, searchTerm):
         """
         [<searchTerm>]
