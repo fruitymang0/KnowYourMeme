@@ -5,13 +5,14 @@ import supybot.utils as utils
 from supybot.commands import *
 import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
-      
+
+_HEADERS = {
+    'User-Agent': 'Mozilla/5.0'}  #browser headers
+
 class KnowYourMeme(callbacks.Plugin):
     """
     Looks up memes on the website KnowYourMeme
     """
-    _HEADERS = {
-    'User-Agent': 'Mozilla/5.0'}  #browser headers
     sT = ""
     count = 0
     
