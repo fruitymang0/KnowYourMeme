@@ -7,7 +7,10 @@ import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
       
 class KnowYourMeme(callbacks.Plugin):
-    
+    """
+    Looks up memes on the website KnowYourMeme
+    """
+
     def meme(self, irc, msg, args, searchTerm):
         """
         [<searchTerm>]
@@ -43,5 +46,5 @@ class KnowYourMeme(callbacks.Plugin):
         irc.reply(catURL)
     memepic = wrap(memepic)
     
-    
+      
 Class = KnowYourMeme
