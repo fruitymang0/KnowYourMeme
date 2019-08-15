@@ -1,31 +1,47 @@
 import requests
+from bs4 import BeautifulSoup
 import supybot.conf as conf
 import supybot.utils as utils
 from supybot.commands import *
 import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
       
-class Animals(callbacks.Plugin):
-    """
-    Pulls a random animal pic from the internet.
-    """
-    def doggo(self, irc, msg, args):
+class KnowYourMeme(callbacks.Plugin):
+    
+    def meme(self, irc, msg, args, searchTerm):
         """
-        Pulls a random doggo pic from the internet.
+        [<searchTerm>]
+        
+        Searches up a meme. If <searchTerm> is provided, it searches a specific meme. Otherwise, it chooses a random one.
         """
-        r = requests.get('https://random.dog/woof.json')
-        dogURL = r.json()['url']
-        irc.reply(dogURL)
-    doggo = wrap(doggo)
+        if(not searchTerm):
+            page = "http://knowyourmeme.com/random"
+        else:
+            for i in searchTerm:  #formatting search term
+            if i == " ":
+                i = "+"
+                searchedURL = "http://knowyourmeme.com/search?q=" + searchTerm # making the search url
+                resultsPage = requests.get(searchedURL, headers=_HEADERS) 
+                soup = BeautifulSoup(resultsPage.content, 'html.parser')  
+                listOfElements = soup.findAll("a", href=True)  #Finding all links in the results page
+                page = "http://knowyourmeme.com" + listOfElements[140]['href']  #Picking first meme
 
-    def cat(self, irc, msg, args):
+        url = requests.get(page, headers=_HEADERS) #opening the final page
+        soup = BeautifulSoup(url.content, 'html.parser')
+        title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
+        finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
+        irc.reply(f"{title}, {finalURL}")
+    meme = wrap(meme, [optional('searchTerm')])
+
+    def memepic(self, irc, msg, args):
         """
-        Pulls a random cat pic from the internet.
+        Gets a meme image from KnowYourMeme.
         """
-        r = requests.get('https://aws.random.cat/meow')
-        catURL = r.json()['file']
+        url = "http://knowyourmeme.com/photos/random"
+        page = requests.get(url, headers=_HEADERS)  # requesting code
+        print(page.url)
         irc.reply(catURL)
-    cat = wrap(cat)
+    memepic = wrap(memepic)
     
     
-Class = Animals
+Class = KnowYourMeme
