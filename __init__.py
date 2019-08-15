@@ -1,5 +1,5 @@
 """
-Pulls random animal pictures off the internet.
+Pulls memes off of KnowYourMeme
 """
 
 import supybot
@@ -31,6 +31,3 @@ if world.testing:
 
 Class = plugin.Class
 configure = config.configure
-
-
-# vim:set shiftwidth=4 softtabstop=4 expandtab textwidth=79:
