@@ -21,13 +21,13 @@ class KnowYourMeme(callbacks.Plugin):
             page = "http://knowyourmeme.com/random"
         else:
             for i in searchTerm:  #formatting search term
-            if i == " ":
-                i = "+"
-                searchedURL = "http://knowyourmeme.com/search?q=" + searchTerm # making the search url
-                resultsPage = requests.get(searchedURL, headers=_HEADERS) 
-                soup = BeautifulSoup(resultsPage.content, 'html.parser')  
-                listOfElements = soup.findAll("a", href=True)  #Finding all links in the results page
-                page = "http://knowyourmeme.com" + listOfElements[140]['href']  #Picking first meme
+                if i == " ":
+                    i = "+"
+            searchedURL = "http://knowyourmeme.com/search?q=" + searchTerm # making the search url
+            resultsPage = requests.get(searchedURL, headers=_HEADERS) 
+            soup = BeautifulSoup(resultsPage.content, 'html.parser')  
+            listOfElements = soup.findAll("a", href=True)  #Finding all links in the results page
+            page = "http://knowyourmeme.com" + listOfElements[140]['href']  #Picking first meme
 
         url = requests.get(page, headers=_HEADERS) #opening the final page
         soup = BeautifulSoup(url.content, 'html.parser')
