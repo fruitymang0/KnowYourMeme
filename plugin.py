@@ -17,8 +17,6 @@ class KnowYourMeme(callbacks.Plugin):
     """
     def fetchMeme(self, irc, msg, args, searchTerm):
         """
-        [<searchTerm>]
-        
         Searches up a meme. If <searchTerm> is provided, it searches for the specific meme. Otherwise, it chooses a random one.
         """
         found = 1
@@ -62,6 +60,11 @@ class KnowYourMeme(callbacks.Plugin):
             irc.reply("No memes were found.")
             
     def meme(self, irc, msg, args, searchTerm):
+        """
+        [<searchTerm>]
+        
+        Searches up a meme. If <searchTerm> is provided, it searches for the specific meme. Otherwise, it chooses a random one.
+        """
         fetchMeme(self, irc, msg, args, searchTerm)
     meme = wrap(meme, [optional('anything')])
 
