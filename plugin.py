@@ -15,7 +15,7 @@ class KnowYourMeme(callbacks.Plugin):
     """
     Looks up memes on the website KnowYourMeme
     """
-    def fetchMeme(searchTerm):
+    def fetchMeme(searchTerm=None):
         """
         Searches up a meme. If <searchTerm> is provided, it searches for the specific meme. Otherwise, it chooses a random one.
         """
