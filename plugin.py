@@ -15,8 +15,7 @@ class KnowYourMeme(callbacks.Plugin):
     """
     Looks up memes on the website KnowYourMeme
     """
-    
-    def meme(self, irc, msg, args, searchTerm):
+    def fetchMeme(self, irc, msg, args, searchTerm):
         """
         [<searchTerm>]
         
@@ -61,6 +60,9 @@ class KnowYourMeme(callbacks.Plugin):
             irc.reply(f"{title}, {finalURL}")
         else:
             irc.reply("No memes were found.")
+            
+    def meme(self, irc, msg, args, searchTerm):
+        fetchMeme(self, irc, msg, args, searchTerm)
     meme = wrap(meme, [optional('anything')])
 
     def memepic(self, irc, msg, args):
@@ -85,7 +87,7 @@ class KnowYourMeme(callbacks.Plugin):
             irc.reply("No meme has been searched for yet.")
         else:
             count += 1
-            meme(self, irc, msg, args, sT)
+            fetchMeme(self, irc, msg, args, sT)
     nextmeme = wrap(nextmeme)
     
       
