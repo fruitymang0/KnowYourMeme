@@ -17,7 +17,7 @@ __author__ = supybot.Author('Alice Smith', 'fruitymang0', '')
 __contributors__ = {}
 
 # This is a url where the most recent plugin package can be downloaded.
-__url__ = '' #'https://github.com/fruitymang0/KnowYourMeme'
+__url__ = '' # 'https://github.com/fruitymang0/KnowYourMeme'
 
 from . import config
 from . import plugin
