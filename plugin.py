@@ -55,11 +55,11 @@ class KnowYourMeme(callbacks.Plugin):
             url = requests.get(page, headers=_HEADERS) #opening the final page
             soup = BeautifulSoup(url.content, 'html.parser')
             title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
-            finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
-            imageurl = soup.find('meta', attrs={"property": "og:image"})['content'] #getting the image
             if(getPic):
-                return(imageurl)
+                imageURL = soup.find('meta', attrs={"property": "og:image"})['content'] #getting the image
+                return(f"{title}, {imageURL}")
             else:
+                finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
                 return(f"{title}, {finalURL}")   
         else:
             return("No memes were found.")
