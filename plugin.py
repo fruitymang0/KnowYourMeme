@@ -24,7 +24,7 @@ class KnowYourMeme(callbacks.Plugin):
             page = "http://knowyourmeme.com/random"
             count = 0
         else:
-            if(sT!=searchTerm)
+            if(sT!=searchTerm):
                 sT = searchTerm
                 count = 0
             for i in searchTerm:  #formatting search term
