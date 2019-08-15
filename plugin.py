@@ -77,7 +77,7 @@ class KnowYourMeme(callbacks.Plugin):
         if(none sT):
             irc.reply("No meme has been searched for yet.")
         else:
-            count +=1
+            count += 1
             meme(self, irc, msg, args, sT)
     next = wrap(next)
     
