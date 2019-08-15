@@ -54,8 +54,7 @@ class KnowYourMeme(callbacks.Plugin):
         """
         url = "http://knowyourmeme.com/photos/random"
         page = requests.get(url, headers=_HEADERS)  # requesting code
-        print(page.url)
-        irc.reply(catURL)
+        irc.reply(page.url)
     memepic = wrap(memepic)
     
       
