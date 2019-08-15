@@ -68,7 +68,7 @@ class KnowYourMeme(callbacks.Plugin):
         title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
         finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
         irc.reply(f"{title}, {finalURL}")
-    memePic = wrap(memepic)
+    memePic = wrap(memePic)
     
     def nextMeme(self, irc, msg, args):
         """
@@ -79,7 +79,7 @@ class KnowYourMeme(callbacks.Plugin):
         else:
             count += 1
             meme(self, irc, msg, args, sT)
-    nextMeme = wrap(next)
+    nextMeme = wrap(nextMeme)
     
       
 Class = KnowYourMeme
