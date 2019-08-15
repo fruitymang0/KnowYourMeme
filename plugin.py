@@ -33,10 +33,10 @@ class KnowYourMeme(callbacks.Plugin):
             searchedURL = "http://knowyourmeme.com/search?q=" + searchTerm # making the search url
             resultsPage = requests.get(searchedURL, headers=_HEADERS) 
             soup = BeautifulSoup(resultsPage.content, 'html.parser')  
-            listOfElements = soup.findAll("a", href=True)  #Finding all links in the results page
+            listOfLinks = soup.findAll("a", href=True)  #Finding all links in the results page
             counter = 0
             count2 = count
-            for i in listOfElements:
+            for i in listOfLinks:
                 if ("/random" in i['href'] and counter > 10) or ("page=2" in i['href']):
                     found = 0
                     break
