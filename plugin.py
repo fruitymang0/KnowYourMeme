@@ -37,7 +37,7 @@ class KnowYourMeme(callbacks.Plugin):
             counter = 0
             count2 = count
             for i in listOfLinks:
-                if ("/random" in i['href'] and counter > 10) or ("page=2" in i['href']):
+                if ("/random" in i['href'] and counter > 10) or ("page=2" in i['href']) or ("photos/trending" in i['href'] and "/memes/" in i['href']):
                     found = 0
                     break
                 if "/memes/" in i['href'] and counter > 110:
