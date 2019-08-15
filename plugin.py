@@ -45,7 +45,7 @@ class KnowYourMeme(callbacks.Plugin):
             finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
             irc.reply(f"{title}, {finalURL}")
         else:
-            irc.reply("No meme was found.")
+            irc.reply("No memes were found.")
     meme = wrap(meme, [optional('searchTerm')])
 
     def memepic(self, irc, msg, args):
