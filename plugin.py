@@ -9,7 +9,7 @@ import supybot.callbacks as callbacks
 _HEADERS = {
     'User-Agent': 'Mozilla/5.0'}  #browser headers
 sT = ""
-count = 0
+count = 1
 
 class KnowYourMeme(callbacks.Plugin):
     """
