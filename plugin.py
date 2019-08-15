@@ -56,7 +56,7 @@ class KnowYourMeme(callbacks.Plugin):
             irc.reply(f"{title}, {finalURL}")
         else:
             irc.reply("No memes were found.")
-    meme = wrap(meme, [optional('searchTerm')])
+    meme = wrap(meme, [optional('any')])
 
     def memePic(self, irc, msg, args):
         """
