@@ -15,7 +15,7 @@ class KnowYourMeme(callbacks.Plugin):
     """
     Looks up memes on the website KnowYourMeme
     """
-    def fetchMeme(self, searchTerm=None):
+    def fetchMeme(self, searchTerm=None, getPic):
         """
         Searches up a meme. If <searchTerm> is provided, it searches for the specific meme. Otherwise, it chooses a random one.
         """
@@ -56,7 +56,11 @@ class KnowYourMeme(callbacks.Plugin):
             soup = BeautifulSoup(url.content, 'html.parser')
             title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
             finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
-            return(f"{title}, {finalURL}")
+            imageurl = soup.find('meta', attrs={"property": "og:image"})['content'] #getting the image
+            if(getPic):
+                return(imageurl)
+            else:
+                return(f"{title}, {finalURL}")   
         else:
             return("No memes were found.")
             
@@ -66,8 +70,17 @@ class KnowYourMeme(callbacks.Plugin):
         
         Searches up a meme. If <searchTerm> is provided, it searches for the specific meme. Otherwise, it chooses a random one.
         """
-        irc.reply(self.fetchMeme(searchTerm))
+        irc.reply(self.fetchMeme(searchTerm, 0))
     meme = wrap(meme, [optional('text')])
+    
+    def getpic(self, irc, msg, args, searchTerm):
+        """
+        [<searchTerm>]
+        
+        Searches up a meme picture.
+        """
+        irc.reply(self.fetchMeme(searchTerm, 1))
+    getpic = wrap(getpic, ['text'])
 
     def memepic(self, irc, msg, args):
         """
@@ -91,7 +104,7 @@ class KnowYourMeme(callbacks.Plugin):
             irc.reply("No meme has been searched for yet.")
         else:
             count += 1
-            irc.reply(self.fetchMeme(sT))
+            irc.reply(self.fetchMeme(sT, 0))
     nextmeme = wrap(nextmeme)
     
       
