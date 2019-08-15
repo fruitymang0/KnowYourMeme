@@ -54,7 +54,10 @@ class KnowYourMeme(callbacks.Plugin):
         """
         url = "http://knowyourmeme.com/photos/random"
         page = requests.get(url, headers=_HEADERS)  # requesting code
-        irc.reply(page.url)
+        soup = BeautifulSoup(page.content, 'html.parser')
+        title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
+        finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
+        irc.reply(f"{title}, {finalURL}")
     memepic = wrap(memepic)
     
       
