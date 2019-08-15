@@ -51,7 +51,7 @@ class KnowYourMeme(callbacks.Plugin):
                     else:
                         count2-=1
                 counter+=1
-            page = "http://knowyourmeme.com" + listOfElements[counter]['href']  #Picking first meme
+            page = "http://knowyourmeme.com" + listOfLinks[counter]['href']  #Picking first meme
 
         if(found):
             url = requests.get(page, headers=_HEADERS) #opening the final page
