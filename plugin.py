@@ -44,6 +44,7 @@ class KnowYourMeme(callbacks.Plugin):
                     break
                 if "/memes/" in i['href'] and counter > 110:
                     if(count2==0):
+                        count+=1
                         break
                     else:
                         count2-=1
