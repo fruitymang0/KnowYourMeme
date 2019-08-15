@@ -17,6 +17,7 @@ class KnowYourMeme(callbacks.Plugin):
         
         Searches up a meme. If <searchTerm> is provided, it searches a specific meme. Otherwise, it chooses a random one.
         """
+        found = 1
         if(not searchTerm):
             page = "http://knowyourmeme.com/random"
         else:
@@ -29,16 +30,22 @@ class KnowYourMeme(callbacks.Plugin):
             listOfElements = soup.findAll("a", href=True)  #Finding all links in the results page
             counter = 0
             for i in listOfElements:
-                if "/memes/" in i['href'] and counter>110:
+                if "/random" in i['href'] and counter > 10:
+                    found = 0
+                    break
+                if "/memes/" in i['href'] and counter > 110:
                     break
                 counter+=1
             page = "http://knowyourmeme.com" + listOfElements[counter]['href']  #Picking first meme
 
-        url = requests.get(page, headers=_HEADERS) #opening the final page
-        soup = BeautifulSoup(url.content, 'html.parser')
-        title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
-        finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
-        irc.reply(f"{title}, {finalURL}")
+        if(found):
+            url = requests.get(page, headers=_HEADERS) #opening the final page
+            soup = BeautifulSoup(url.content, 'html.parser')
+            title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
+            finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
+            irc.reply(f"{title}, {finalURL}")
+        else:
+            irc.reply("No meme was found.")
     meme = wrap(meme, [optional('searchTerm')])
 
     def memepic(self, irc, msg, args):
