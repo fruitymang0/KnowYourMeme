@@ -67,7 +67,7 @@ class KnowYourMeme(callbacks.Plugin):
         Searches up a meme. If <searchTerm> is provided, it searches for the specific meme. Otherwise, it chooses a random one.
         """
         irc.reply(self.fetchMeme(searchTerm))
-    meme = wrap(meme, [optional('anything')])
+    meme = wrap(meme, [optional('string')])
 
     def memepic(self, irc, msg, args):
         """
