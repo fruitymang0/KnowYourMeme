@@ -10,6 +10,8 @@ class KnowYourMeme(callbacks.Plugin):
     """
     Looks up memes on the website KnowYourMeme
     """
+    _HEADERS = {
+    'User-Agent': 'Mozilla/5.0'}  #browser headers
     sT = ""
     count = 0
     
