@@ -45,7 +45,7 @@ class KnowYourMeme(callbacks.Plugin):
                     if(count2==0):
                         break
                     else:
-                        count2--
+                        count2-=1
                 counter+=1
             page = "http://knowyourmeme.com" + listOfElements[counter]['href']  #Picking first meme
 
