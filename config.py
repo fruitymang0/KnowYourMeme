@@ -9,4 +9,4 @@ def configure(advanced):
     from supybot.questions import expect, anything, something, yn
     conf.registerPlugin('KnowYourMeme', True)
 
-KnowYourMeme = conf.registerPlugin('Animals')
+KnowYourMeme = conf.registerPlugin('KnowYourMeme')
