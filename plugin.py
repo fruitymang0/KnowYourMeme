@@ -17,7 +17,7 @@ class KnowYourMeme(callbacks.Plugin):
         """
         [<searchTerm>]
         
-        Searches up a meme. If <searchTerm> is provided, it searches a specific meme. Otherwise, it chooses a random one.
+        Searches up a meme. If <searchTerm> is provided, it searches for the specific meme. Otherwise, it chooses a random one.
         """
         found = 1
         if(not searchTerm):
