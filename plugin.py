@@ -24,11 +24,11 @@ class KnowYourMeme(callbacks.Plugin):
         global count
         if(not searchTerm):
             page = "http://knowyourmeme.com/random"
-            count = 0
+            count = 1
         else:
             if(sT!=searchTerm):
                 sT = searchTerm
-                count = 0
+                count = 1
             for i in searchTerm:  #formatting search term
                 if i == " ":
                     i = "+"
