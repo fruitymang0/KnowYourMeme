@@ -58,7 +58,7 @@ class KnowYourMeme(callbacks.Plugin):
             irc.reply("No memes were found.")
     meme = wrap(meme, [optional('searchTerm')])
 
-    def memepic(self, irc, msg, args):
+    def memePic(self, irc, msg, args):
         """
         Gets a meme image from KnowYourMeme.
         """
@@ -68,9 +68,9 @@ class KnowYourMeme(callbacks.Plugin):
         title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
         finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
         irc.reply(f"{title}, {finalURL}")
-    memepic = wrap(memepic)
+    memePic = wrap(memepic)
     
-    def next(self, irc, msg, args):
+    def nextMeme(self, irc, msg, args):
         """
         Goes to the next meme on the list.
         """
@@ -79,7 +79,7 @@ class KnowYourMeme(callbacks.Plugin):
         else:
             count += 1
             meme(self, irc, msg, args, sT)
-    next = wrap(next)
+    nextMeme = wrap(next)
     
       
 Class = KnowYourMeme
