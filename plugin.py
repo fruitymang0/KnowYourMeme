@@ -79,7 +79,7 @@ class KnowYourMeme(callbacks.Plugin):
         else:
             count +=1
             meme(self, irc, msg, args, sT)
-    meme = wrap(meme)
+    next = wrap(next)
     
       
 Class = KnowYourMeme
