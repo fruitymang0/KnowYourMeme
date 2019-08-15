@@ -27,7 +27,12 @@ class KnowYourMeme(callbacks.Plugin):
             resultsPage = requests.get(searchedURL, headers=_HEADERS) 
             soup = BeautifulSoup(resultsPage.content, 'html.parser')  
             listOfElements = soup.findAll("a", href=True)  #Finding all links in the results page
-            page = "http://knowyourmeme.com" + listOfElements[140]['href']  #Picking first meme
+            counter = 0
+            for i in listOfElements:
+                if "/memes/" in i['href'] and counter>110:
+                    break
+                counter+=1
+            page = "http://knowyourmeme.com" + listOfElements[counter]['href']  #Picking first meme
 
         url = requests.get(page, headers=_HEADERS) #opening the final page
         soup = BeautifulSoup(url.content, 'html.parser')
