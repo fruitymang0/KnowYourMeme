@@ -1,5 +1,5 @@
 """
-Pulls memes off of KnowYourMeme
+Pulls memes off of KnowYourMeme.
 """
 
 import supybot
