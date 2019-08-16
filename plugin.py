@@ -113,7 +113,9 @@ class KnowYourMeme(callbacks.Plugin):
         Searches up a meme picture.
         """
         global picGotten
+        global lastCounter
         picGotten = 1
+        lastCounter = 0
         irc.reply(self.fetchMeme(searchTerm, 1))
     getpic = wrap(getpic, ['text'])
 
