@@ -10,7 +10,7 @@ _HEADERS = {
     'User-Agent': 'Mozilla/5.0'}  #browser headers
 sT = ""
 count = 1
-imgCount = -1
+imgCount = 0
 
 class KnowYourMeme(callbacks.Plugin):
     """
