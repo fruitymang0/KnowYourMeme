@@ -11,7 +11,8 @@ _HEADERS = {
 sT = ""
 count = 1
 imgCount = 1
-
+picGotten = 0
+lastCounter = 0
 class KnowYourMeme(callbacks.Plugin):
     """
     Looks up memes on the website KnowYourMeme
@@ -24,6 +25,7 @@ class KnowYourMeme(callbacks.Plugin):
         global sT
         global count
         global imgCount
+        global lastCounter
         if(not searchTerm):
             page = "http://knowyourmeme.com/random"
             count = 1
@@ -72,6 +74,10 @@ class KnowYourMeme(callbacks.Plugin):
                             picCount -=1
                     counter+=1
                 counter-=1
+                if(lastCounter==counter):
+                    return("No more pictures were found.")
+                else:
+                    lastCounter=counter
                 page = "http://knowyourmeme.com" + listOfPicLinks[counter]['href']
                 url = requests.get(page, headers=_HEADERS) #opening the final page
                 soup = BeautifulSoup(url.content, 'html.parser')
@@ -93,6 +99,8 @@ class KnowYourMeme(callbacks.Plugin):
         
         Searches up a meme. If <searchTerm> is provided, it searches for the specific meme. Otherwise, it chooses a random one.
         """
+        global picGotten
+        picGotten = 0
         irc.reply(self.fetchMeme(searchTerm, 0))
     meme = wrap(meme, [optional('text')])
     
@@ -102,6 +110,8 @@ class KnowYourMeme(callbacks.Plugin):
         
         Searches up a meme picture.
         """
+        global picGotten
+        picGotten = 1
         irc.reply(self.fetchMeme(searchTerm, 1))
     getpic = wrap(getpic, ['text'])
 
@@ -136,8 +146,9 @@ class KnowYourMeme(callbacks.Plugin):
         """
         global sT
         global imgCount
-        if sT is None:
-            irc.reply("No meme has been searched for yet.")
+        global picGotten
+        if picGotten is None:
+            irc.reply("No meme picture has been searched for yet. Use the @memepic command.")
         else:
             imgCount += 1
             irc.reply(self.fetchMeme(sT, 1))
