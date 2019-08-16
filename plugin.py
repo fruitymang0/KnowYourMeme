@@ -72,7 +72,6 @@ class KnowYourMeme(callbacks.Plugin):
                         else:
                             picCount -=1
                     counter+=1
-                counter+=1
                 page = "http://knowyourmeme.com" + listOfPicLinks[counter]['href']
                 url = requests.get(page, headers=_HEADERS) #opening the final page
                 soup = BeautifulSoup(url.content, 'html.parser')
