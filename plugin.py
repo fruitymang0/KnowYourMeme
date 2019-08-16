@@ -10,7 +10,7 @@ _HEADERS = {
     'User-Agent': 'Mozilla/5.0'}  #browser headers
 sT = ""
 count = 1
-imgCount = 1
+imgCount = 0
 
 class KnowYourMeme(callbacks.Plugin):
     """
@@ -67,7 +67,6 @@ class KnowYourMeme(callbacks.Plugin):
                 for i in listOfPicLinks:
                     if("/photo" in i['href']):
                         if(picCount==0):
-                            imgCount+=1
                             break
                         else:
                             picCount -=1
