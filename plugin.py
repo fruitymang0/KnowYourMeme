@@ -10,6 +10,7 @@ _HEADERS = {
     'User-Agent': 'Mozilla/5.0'}  #browser headers
 sT = ""
 count = 1
+imgCount = 1
 
 class KnowYourMeme(callbacks.Plugin):
     """
@@ -22,13 +23,16 @@ class KnowYourMeme(callbacks.Plugin):
         found = 1
         global sT
         global count
+        global imgCount
         if(not searchTerm):
             page = "http://knowyourmeme.com/random"
             count = 1
+            imgCount = 1
         else:
             if(sT!=searchTerm):
                 sT = searchTerm
                 count = 1
+                imgCount = 1
             for i in searchTerm:  #formatting search term
                 if i == " ":
                     i = "+"
@@ -52,13 +56,32 @@ class KnowYourMeme(callbacks.Plugin):
             page = "http://knowyourmeme.com" + listOfLinks[counter]['href']  #Picking first meme
 
         if(found):
-            url = requests.get(page, headers=_HEADERS) #opening the final page
-            soup = BeautifulSoup(url.content, 'html.parser')
-            title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
             if(getPic):
+                picURL = page + "/photos"
+                picPage = requests.get(picURL, headers=_HEADERS) 
+                soup = BeautifulSoup(picPage.content, 'html.parser')  
+                listOfPicLinks = soup.findAll("a", class_='photo')  #Finding all links in the results page
+                counter = 0
+                picCount = imgCount
+                for i in listOfPicLinks:
+                    if("/photo" in i['href']):
+                        if(picCount==0):
+                            imgCount+=1
+                            break
+                        else:
+                            picCount -=1
+                    counter+=1
+                counter+=1
+                page = "http://knowyourmeme.com" + listOfPicLinks[counter]['href']
+                url = requests.get(page, headers=_HEADERS) #opening the final page
+                soup = BeautifulSoup(url.content, 'html.parser')
+                title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
                 imageURL = soup.find('meta', attrs={"property": "og:image"})['content'] #getting the image
                 return(f"{title}, {imageURL}")
             else:
+                url = requests.get(page, headers=_HEADERS) #opening the final page
+                soup = BeautifulSoup(url.content, 'html.parser')
+                title = soup.find('meta', attrs={"property": "og:title"})['content'] #getting title info
                 finalURL = soup.find('meta', attrs={"property": "og:url"})['content'] #getting the page url
                 return(f"{title}, {finalURL}")   
         else:
@@ -107,5 +130,17 @@ class KnowYourMeme(callbacks.Plugin):
             irc.reply(self.fetchMeme(sT, 0))
     nextmeme = wrap(nextmeme)
     
-      
+    def nextpic(self, irc, msg, args):
+        """
+        Goes to the next meme on the list.
+        """
+        global sT
+        global imgCount
+        if sT is None:
+            irc.reply("No meme has been searched for yet.")
+        else:
+            imgCount += 1
+            irc.reply(self.fetchMeme(sT, 1))
+    nextpic = wrap(nextpic)
+    
 Class = KnowYourMeme
