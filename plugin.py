@@ -147,7 +147,7 @@ class KnowYourMeme(callbacks.Plugin):
         global sT
         global imgCount
         global picGotten
-        if(not PicGotten):
+        if(not picGotten):
             irc.reply("No meme picture has been searched for yet. Use the @memepic command.")
         else:
             imgCount += 1
