@@ -30,11 +30,13 @@ class KnowYourMeme(callbacks.Plugin):
             page = "http://knowyourmeme.com/random"
             count = 1
             imgCount = 1
+            lastCounter = 0
         else:
             if(sT!=searchTerm):
                 sT = searchTerm
                 count = 1
                 imgCount = 1
+                lastCounter = 0
             for i in searchTerm:  #formatting search term
                 if i == " ":
                     i = "+"
