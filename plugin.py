@@ -48,7 +48,8 @@ class KnowYourMeme(callbacks.Plugin):
                     break
                 if "/memes/" in i['href'] and counter > 110:
                     if(count2==0):
-                        count+=1
+                        if(not getPic):
+                            count+=1
                         break
                     else:
                         count2-=1
@@ -142,5 +143,6 @@ class KnowYourMeme(callbacks.Plugin):
             imgCount += 1
             irc.reply(self.fetchMeme(sT, 1))
     nextpic = wrap(nextpic)
+    
     
 Class = KnowYourMeme
