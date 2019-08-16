@@ -142,13 +142,13 @@ class KnowYourMeme(callbacks.Plugin):
     
     def nextpic(self, irc, msg, args):
         """
-        Goes to the next meme on the list.
+        Goes to the next picture of the meme that has been searched for.
         """
         global sT
         global imgCount
         global picGotten
         if(not picGotten):
-            irc.reply("No meme picture has been searched for yet. Use the @memepic command.")
+            irc.reply("No meme picture has been searched for yet. Use the @getpic command.")
         else:
             imgCount += 1
             irc.reply(self.fetchMeme(sT, 1))
